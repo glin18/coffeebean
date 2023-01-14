@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.coffeebean.coffee_project.entity.Product;
@@ -42,6 +43,13 @@ public class AdminController {
 	@PostMapping("/products/add")
 	public void addProduct(@ModelAttribute Product newProduct, HttpServletResponse response) throws IOException {
 		productRepository.save(newProduct);
+		response.sendRedirect("/admin");
+	}
+	
+	@GetMapping("/products/delete")
+	public void deleteProduct(@RequestParam Long productid, HttpServletResponse response ) throws IOException {
+		Product deleteProduct = productRepository.findById(productid).get();
+		productRepository.delete(deleteProduct);
 		response.sendRedirect("/admin");
 	}
 	

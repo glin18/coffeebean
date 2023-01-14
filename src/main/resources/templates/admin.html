@@ -50,16 +50,16 @@
         		</thead>
         		<tbody>
         			<tr th:each="product:${products}">
-        				<td th:text="${product.name}"></td>
-        				<td th:text="${product.price}"></td>
-        				<td th:text="${product.description}"></td>
-        				<td th:text="${product.stock}"></td>
+        				<td th:text="${product.getName()}"></td>
+        				<td th:text="${product.getPrice()}"></td>
+        				<td th:text="${product.getDescription()}"></td>
+        				<td th:text="${product.getStock()}"></td>
         				<td>
-        					<img src="${product.image}"></img>
+        					<img th:src="${product.getImage()}" width="200" height="200"></img>
         				</td>
         				<td>
-        					<a class = "btn btn-primary mt-1">Edit</a>
-        					<a class = "btn btn-danger mt-1">Remove</a>
+        					<a th:href="@{/admin/products/edit(productid=${product.getId()})}" class = "btn btn-primary mt-1">Edit</a>
+        					<a th:href="@{/admin/products/delete(productid=${product.getId()})}" class = "btn btn-danger mt-1">Remove</a>
         				</td>
         			</tr>
         		</tbody>
