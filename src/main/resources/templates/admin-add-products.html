@@ -38,7 +38,7 @@
         <div class="container mb-4">
         	<h1 class="mt-4">Add Products</h1>
         	<hr>
-        	<form th:action="@{/addTodo}" th:object="${newProduct}" method="POST">
+        	<form th:action="@{/admin/products/add}" th:object="${newProduct}" method="POST">
         		<label class="form-label">Product Name</label>
 				<input type="text" th:field="*{name}" placeholder="Enter Product Name" class="form-control col-4 mb-4" required>
 				<label class="form-label">Product Price</label>
@@ -48,9 +48,9 @@
 				<label class = "form-label">Product Stock</label>
 				<input type="number" th:field="*{stock}" class="form-control col-4 mb-4" min="0" required>
 				<label class = "form-label">Product Image URL</label>
-				<input type="text" th:field="*{image}" placeholder="Enter Todo" class="form-control col-4 mb-4" required>
+				<input type="text" th:field="*{image}" placeholder="Enter Image URL" class="form-control col-4 mb-4" required>
 				
-				<button class="btn btn-primary" type="submit">Add</button>
+				<button class="btn btn-primary" type="submit">Add Product</button>
 			</form>
 			<hr>
         	<a th:href="@{/admin}">Back to Admin</a>
