@@ -19,8 +19,8 @@ public class AdminController {
 	@GetMapping("/products/add")
 	public ModelAndView adminAddProducts() {
 		ModelAndView mav = new ModelAndView("admin-add-products");
-		Product product = new Product();
-		mav.addObject("product", product);
+		Product newProduct = new Product();
+		mav.addObject("newProduct", newProduct);
 		return mav;
 	}
 }
