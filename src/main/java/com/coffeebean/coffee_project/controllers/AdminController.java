@@ -1,6 +1,7 @@
 package com.coffeebean.coffee_project.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +24,11 @@ public class AdminController {
 	ProductRepository productRepository;
 	
 	@GetMapping
-	public String adminPage() {
-		return "admin";
+	public ModelAndView adminPage() {
+		List<Product> productsList = productRepository.findAll();
+		ModelAndView mav = new ModelAndView("admin");
+		mav.addObject("products", productsList);
+		return mav;
 	}
 	
 	@GetMapping("/products/add")

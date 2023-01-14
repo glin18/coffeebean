@@ -49,15 +49,17 @@
         			<th>Action</th>
         		</thead>
         		<tbody>
-        			<tr>
-        				<td></td>
-        				<td></td>
-        				<td></td>
-        				<td></td>
-        				<td></td>
+        			<tr th:each="product:${products}">
+        				<td th:text="${product.name}"></td>
+        				<td th:text="${product.price}"></td>
+        				<td th:text="${product.description}"></td>
+        				<td th:text="${product.stock}"></td>
         				<td>
-        					<a class = "btn btn-danger">Remove Product</a>
-        					<a class = "btn btn-primary">Edit Product</a>
+        					<img src="${product.image}"></img>
+        				</td>
+        				<td>
+        					<a class = "btn btn-primary mt-1">Edit</a>
+        					<a class = "btn btn-danger mt-1">Remove</a>
         				</td>
         			</tr>
         		</tbody>
