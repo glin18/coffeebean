@@ -53,5 +53,12 @@ public class AdminController {
 		response.sendRedirect("/admin");
 	}
 	
+	@GetMapping("/products/edit")
+	public ModelAndView editProduct(@RequestParam Long productid) {
+		Product editProduct = productRepository.findById(productid).get();
+		ModelAndView mav = new ModelAndView("admin-edit-products");
+		mav.addObject("editProduct", editProduct);
+		return mav;
+	}
 	
 }
