@@ -53,12 +53,26 @@ public class AdminController {
 		response.sendRedirect("/admin");
 	}
 	
+	// Editing Product Form	
 	@GetMapping("/products/edit")
-	public ModelAndView editProduct(@RequestParam Long productid) {
+	public ModelAndView editProductForm(@RequestParam Long productid) {
 		Product editProduct = productRepository.findById(productid).get();
 		ModelAndView mav = new ModelAndView("admin-edit-products");
 		mav.addObject("editProduct", editProduct);
 		return mav;
 	}
+	
+	@PostMapping("/products/edit")
+	public void editProduct(@ModelAttribute Product editedProduct, HttpServletResponse response) throws IOException {
+		Product oldProduct = productRepository.findById(editedProduct.getId()).get();
+		oldProduct.setDescription(editedProduct.getDescription());
+		oldProduct.setName(editedProduct.getName());
+		oldProduct.setPrice(editedProduct.getPrice());
+		oldProduct.setStock(editedProduct.getStock());
+		oldProduct.setImage(editedProduct.getImage());
+		productRepository.save(oldProduct);
+		response.sendRedirect("/admin");
+	}
+	
 	
 }

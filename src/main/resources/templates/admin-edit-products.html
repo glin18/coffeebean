@@ -49,7 +49,7 @@
 				<input type="number" th:field="*{stock}" class="form-control col-4 mb-4" min="0" value="*{stock}" required>
 				<label class = "form-label">Product Image URL</label>
 				<input type="text" th:field="*{image}" placeholder="Enter Image URL" class="form-control col-4 mb-4" value="*{image}" required>
-				
+				<input type="hidden" th:field="*{id}" value = "*{id}">
 				<button class="btn btn-primary" type="submit">Edit Product</button>
 			</form>
 			<hr>
