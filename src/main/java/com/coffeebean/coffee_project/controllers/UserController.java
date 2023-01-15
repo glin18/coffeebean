@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.coffeebean.coffee_project.model.UserModel;
+import com.coffeebean.coffee_project.service.UserService;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
+	
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/signup")
 	public ModelAndView signUpForm() {
@@ -29,6 +34,8 @@ public class UserController {
 	public void signUp(@ModelAttribute UserModel userModel, HttpServletResponse response) throws IOException {
 		if(userModel.getPassword().contentEquals(userModel.getRepeatPassword())) {
 			response.sendRedirect("/users/signup");
+		} else {
+			userService.registerUser();
 		}
 	}
 }
