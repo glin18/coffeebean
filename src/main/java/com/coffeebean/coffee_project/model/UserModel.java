@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class UserModel {
 	private String email;
 	private String password;
+	private String repeatPassword;
 	private String username;
 }
