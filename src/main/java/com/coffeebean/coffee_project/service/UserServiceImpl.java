@@ -3,6 +3,7 @@ package com.coffeebean.coffee_project.service;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.coffeebean.coffee_project.entity.Role;
@@ -20,6 +21,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public String registerUser(UserModel userModel) {
 		// We can't save a userModel directly in the database because it is a different entity
@@ -27,8 +31,10 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		user.setUsername(userModel.getUsername());
 		user.setEmail(userModel.getEmail());
-		user.setPassword(userModel.getPassword());
+		// Use passwordEncoder.encode() to encode our password so it is not stored as plain text
+		user.setPassword(passwordEncoder.encode(userModel.getPassword()));
 		Role role = roleRepository.findByName("USER");
+		// make sure that we setRoles as a list
 		user.setRoles(Arrays.asList(role));
 		userRepository.save(user);
 		return "success";

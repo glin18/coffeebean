@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.coffeebean.coffee_project.entity.User;
 import com.coffeebean.coffee_project.repository.UserRepository;
@@ -15,6 +16,7 @@ import com.coffeebean.coffee_project.repository.UserRepository;
 // We need to create our own custom implementation of the UserDetailsService 
 // and override the loadUserByUsername method
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
@@ -37,6 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 					// A fancy for loop
 					// SimpleGrantedAuthority may allow us to have a more granular form of the role
 					// basically allows us to have more specific roles
+					// for example if we want a user to only be able to read certain places or not be able to create etc...
 					user.getRoles().stream().map((role) -> new SimpleGrantedAuthority(role.getName()))
 						.collect(Collectors.toList())
 					);

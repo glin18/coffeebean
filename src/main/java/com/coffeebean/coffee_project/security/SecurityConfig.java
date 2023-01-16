@@ -1,15 +1,29 @@
 package com.coffeebean.coffee_project.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	// our custom user details service
+	@Autowired
+	private CustomUserDetailsService userDetailsService;
+	
+	// password encoder so we don't store password in plain text
+	@Bean
+	public static PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -27,11 +41,22 @@ public class SecurityConfig {
 				.loginProcessingUrl("/users/login")
 				.failureUrl("/users/login?error=true")
 				.permitAll()
-			).logout(logout -> logout
-				.logoutRequestMatcher(new AntPathRequestMatcher("/users/logout"))
-				.permitAll()
-					);
+			).logout()
+			 .logoutUrl("/users/logout")
+			 .logoutSuccessUrl("/users/login")
+			 .invalidateHttpSession(true)
+			 .deleteCookies("JSESSIONID");
+		// When logging out we invalidate the session and we delete the cookie
 		return http.build();
 	}
+	
+	// Request -> Authentication Filter -> Authentication Manager -> Authentication Provider -> UserDetailsService -> DB
+	// configure our authentication manager, we will not configure our own authentication provider
+	public void configure(AuthenticationManagerBuilder builder) throws Exception {
+		// pass in our userDetailsService and our passwordEncoder
+		// Spring security will handle the rest for us
+		builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
+	
 	
 }
