@@ -33,6 +33,14 @@ public class UserController {
 		return mav;
 	}
 	
+	@GetMapping("/login")
+	public ModelAndView loginForm() {
+		ModelAndView mav = new ModelAndView("login-form");
+		UserModel userModel = new UserModel();
+		mav.addObject("userModel", userModel);
+		return mav;
+	}
+	
 	@PostMapping("/signup")
 	public String signUp(@Valid @ModelAttribute UserModel userModel,  
 			BindingResult result) {
