@@ -35,17 +35,18 @@ public class SecurityConfig {
 			.antMatchers("/users/signup", "/users/login", "/users/products", "/", "/home")
 			.permitAll()
 			.and()
-			.formLogin(form -> form
+			.formLogin()
 				.loginPage("/users/login")
 				.defaultSuccessUrl("/home?loggedin")
 				.loginProcessingUrl("/users/login")
 				.failureUrl("/users/login?error=true")
 				.permitAll()
-			).logout()
-			 .logoutUrl("/users/logout")
-			 .logoutSuccessUrl("/users/login")
-			 .invalidateHttpSession(true)
-			 .deleteCookies("JSESSIONID");
+			.and()
+			    .logout()
+			    .logoutUrl("/users/logout")
+			    .logoutSuccessUrl("/users/login")
+			    .invalidateHttpSession(true)
+			    .deleteCookies("JSESSIONID");
 		// When logging out we invalidate the session and we delete the cookie
 		return http.build();
 	}
