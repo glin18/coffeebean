@@ -35,7 +35,7 @@ public class UserController {
 		if(userModel.getPassword().contentEquals(userModel.getRepeatPassword())) {
 			response.sendRedirect("/users/signup");
 		} else {
-			userService.registerUser();
+			userService.registerUser(userModel);
 		}
 	}
 }
