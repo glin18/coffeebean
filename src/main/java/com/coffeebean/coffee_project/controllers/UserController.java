@@ -39,12 +39,16 @@ public class UserController {
 		User existingUsername = userService.findByUsername(userModel.getUsername());
 		User existingEmail = userService.findByEmail(userModel.getEmail());
 		if(existingUsername != null || existingEmail!=null) {
-			return "/users/signup";
+			return "redirect:/users/signup?existing";
 		}
 		
-		if(!userModel.getPassword().contentEquals(userModel.getRepeatPassword()) || result.hasErrors()) {
-			return "/users/signup";
+		if(result.hasErrors()) {
+			return "redirect:/users/signup?invalid";
 		} 
+		
+		if(!userModel.getPassword().contentEquals(userModel.getRepeatPassword())) {
+			return "redirect:/users/signup?password";
+		}
 		userService.registerUser(userModel);
 		return "redirect:/home?success";
 		

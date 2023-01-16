@@ -46,6 +46,15 @@
         </nav>
         
         <div class="container mt-4">
+        	<div th:if="${param.existing}" class="alert alert-danger w-50 mx-auto text-center">
+        		Existing username or email
+        	</div>
+        	<div th:if="${param.invalid}" class="alert alert-danger w-50 mx-auto text-center">
+        		Invalid Input
+        	</div>
+        	<div th:if="${param.password}" class="alert alert-danger w-50 mx-auto text-center">
+        		Repeated password did not match
+        	</div>
         	<h1>Sign up</h1>
         	<hr>
         	<form th:action="@{/users/signup}" th:object="${userModel}" method="POST">
