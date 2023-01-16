@@ -47,7 +47,7 @@
         
         <div class="container mt-4">
         	
-        	<div th:if="${param.invalid}" class="alert alert-danger w-50 mx-auto text-center">
+        	<div th:if="${param.error}" class="alert alert-danger w-50 mx-auto text-center">
         		Incorrect username or password
         	</div>
         	<div th:if="${param.logout}" class="alert alert-success w-50 mx-auto text-center">
@@ -55,7 +55,7 @@
         	</div>
         	<h1>Login</h1>
         	<hr>
-        	<form th:action="@{/users/signup}" method="POST">
+        	<form th:action="@{/users/login}" method="POST">
 			  <div class="mb-3">
 			  	<label class="form-label">Username</label>
 			  	<input type="text" class="form-control" id="username" name="username" required>
@@ -64,7 +64,7 @@
 			    <label class="form-label">Password</label>
 			    <input type="password" class="form-control" id="password" name="password" required>
 			  </div>
-			  <button type="submit" class="btn btn-primary mt-2">Submit</button>
+			  <button type="submit" value="Log in" class="btn btn-primary mt-2">Submit</button>
 			</form>
 			<hr>
 			<a th:href="@{/users/signup}" class="btn btn-secondary mt-4">Don't have an account? Register here</a>
