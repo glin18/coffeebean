@@ -9,4 +9,6 @@ public interface UserService {
 	public User findByEmail(String email);
 	
 	public User findByUsername(String username);
+	
+	public boolean checkAdmin();
 }

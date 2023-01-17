@@ -3,6 +3,8 @@ package com.coffeebean.coffee_project.service;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
+	}
+
+	// check if user is admin
+	@Override
+	public boolean checkAdmin() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
+		    return true;
+		}
+		return false;
 	}
 
 }

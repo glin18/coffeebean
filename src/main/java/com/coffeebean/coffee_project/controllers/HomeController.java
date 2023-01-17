@@ -22,6 +22,9 @@ public class HomeController {
 		if(email != null) {
 			User user = userService.findByEmail(email);
 			model.addAttribute("user", user);
+			// check if user is admin
+			boolean isAdmin = userService.checkAdmin();
+			model.addAttribute("isadmin", isAdmin);
 		}
 		return "home";
 	}
