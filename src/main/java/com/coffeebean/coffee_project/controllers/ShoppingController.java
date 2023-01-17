@@ -34,8 +34,11 @@ public class ShoppingController {
 	@GetMapping("/beans")
 	public ModelAndView showBeans() {
 		ModelAndView mav = new ModelAndView("show-beans");
+		String email = SecurityUtil.getSessionUser();
+		User user = userService.findByEmail(email);
 		List<Product> allProducts = productRepository.findAll();
 		mav.addObject("allProducts", allProducts);
+		mav.addObject("user", user);
 		return mav;
 	}
 	
