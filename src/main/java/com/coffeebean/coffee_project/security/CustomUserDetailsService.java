@@ -41,6 +41,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 			// SimpleGrantedAuthority may allow us to have a more granular form of the role
 			// basically allows us to have more specific roles
 			// for example if we want a user to only be able to read certain places or not be able to create etc...
+			
+			// We are creating a new set and adding SimpleGrantedAuthorities inside with the name of the roles
 			List<Role> roles = user.getRoles();
 			Set<GrantedAuthority> ga = new HashSet<>();
 			for(Role role : roles) {
