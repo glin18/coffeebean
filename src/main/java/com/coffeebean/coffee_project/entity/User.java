@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -45,6 +46,10 @@ public class User {
 			inverseJoinColumns= {@JoinColumn(name="role_id", referencedColumnName="id")}
 			)
 	private List<Role> roles = new ArrayList<>();
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="cart_id", referencedColumnName="id")
+	private Cart cart = new Cart();
 	
 	
 }
