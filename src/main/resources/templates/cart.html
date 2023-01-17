@@ -49,6 +49,9 @@
         	<div th:if="${param.success}" class="alert alert-success w-50 mx-auto text-center">
         		Added to Cart Successfully!
         	</div>
+        	<div th:if="${param.removed}" class="alert alert-success w-50 mx-auto text-center">
+        		Item removed from Cart Successfully!
+        	</div>
         	<h1 class="mt-3">Shopping Cart</h1>
         	<div th:if="${user} != null" class = "mt-3">
         		<h2><span th:text="${user.getUsername()}"></span>'s Cart</h2>

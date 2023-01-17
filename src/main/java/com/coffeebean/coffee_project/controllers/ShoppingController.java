@@ -61,4 +61,16 @@ public class ShoppingController {
 		cartRepository.save(cart);
 		return "redirect:/products/cart?success";
 	}
+	
+	@GetMapping("/cart/remove")
+	public String removeCart(@RequestParam Long productid) {
+		String email = SecurityUtil.getSessionUser();
+		Cart cart = userService.findByEmail(email).getCart();
+		Product product = productRepository.findById(productid).get();
+		List<Product> newProductList = cart.getProducts();
+		newProductList.remove(product);
+		cart.setProducts(newProductList);
+		cartRepository.save(cart);
+		return "redirect:/products/cart?removed";
+	}
 }
