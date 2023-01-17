@@ -18,7 +18,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" th:href="@{/products/beans}">All Beans</a></li>
+                                <li><a class="dropdown-item" th:href="@{/products/beans}">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="#!">Popular Items</a></li>
                                 <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
@@ -53,6 +53,7 @@
         		Item removed from Cart Successfully!
         	</div>
         	<h1 class="mt-3">Shopping Cart</h1>
+        	<hr>
         	<div th:if="${user} != null" class = "mt-3">
         		<h2><span th:text="${user.getUsername()}"></span>'s Cart</h2>
         	</div>
@@ -77,6 +78,8 @@
         			</tr>
         		</tbody>
         	</table>
+        	<hr>
+        	<a th:href="@{/products/beans}" class="btn btn-primary">Keep Shopping</a>
         	
         </div>
         
