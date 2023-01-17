@@ -52,10 +52,10 @@
         	<div th:if="${param.removed}" class="alert alert-success w-50 mx-auto text-center">
         		Item removed from Cart Successfully!
         	</div>
-        	<h1 class="mt-3">Shopping Cart</h1>
+        	<h1 class="mt-3 text-center">Shopping Cart</h1>
         	<hr>
         	<div th:if="${user} != null" class = "mt-3">
-        		<h2><span th:text="${user.getUsername()}"></span>'s Cart</h2>
+        		<h4>Hey <span th:text="${user.getUsername()}"></span>, review your cart before checkout!</h4>
         	</div>
         	
         	<table class="table table-bordered table-striped mt-3 w-50">
@@ -78,6 +78,9 @@
         			</tr>
         		</tbody>
         	</table>
+        	<h6>Total Items: <span th:text="${user.getCart().getProducts().size()}"></span></h6>
+        	<h6>Total Cost: <span th:text="${#numbers.formatCurrency(totalcost)}"></span></h6>
+        	<button class="btn btn-primary mt-2">Checkout</button>
         	<hr>
         	<a th:href="@{/products/beans}" class="btn btn-primary">Keep Shopping</a>
         	

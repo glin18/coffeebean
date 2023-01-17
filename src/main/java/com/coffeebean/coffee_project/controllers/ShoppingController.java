@@ -47,6 +47,13 @@ public class ShoppingController {
 		String email = SecurityUtil.getSessionUser();
 		User user = userService.findByEmail(email);
 		model.addAttribute("user", user);
+		
+		//calculate total price
+		double totalCost = 0;
+		for(Product product: user.getCart().getProducts()) {
+			totalCost += product.getPrice();
+		}
+		model.addAttribute("totalcost", totalCost);
 		return "cart";
 	}
 	
