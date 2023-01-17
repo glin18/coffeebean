@@ -54,7 +54,7 @@
         		<h2><span th:text="${user.getUsername()}"></span>'s Cart</h2>
         	</div>
         	
-        	<table class="table table-bordered table-striped mt-3">
+        	<table class="table table-bordered table-striped mt-3 w-50">
         		<thead>
         			<th>Name</th>
         			<th>Price</th>
@@ -64,7 +64,7 @@
         		<tbody>
         			<tr th:each="product:${user.getCart().getProducts()}">
         				<td th:text="${product.getName()}"></td>
-        				<td th:text="${product.getPrice()}"></td>
+        				<td th:text="${#numbers.formatCurrency(product.getPrice())}"></td>
         				<td>
         					<img th:src="${product.getImage()}" width="200" height="200"></img>
         				</td>
