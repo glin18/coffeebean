@@ -1,14 +1,20 @@
 package com.coffeebean.coffee_project.security;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.coffeebean.coffee_project.entity.Role;
 import com.coffeebean.coffee_project.entity.User;
 import com.coffeebean.coffee_project.repository.UserRepository;
 
@@ -31,18 +37,28 @@ public class CustomUserDetailsService implements UserDetailsService {
 		// This is different to our User entity, which can be confusing
 		// Perhaps it would have been better to call the User class by a different name such as UserEntity
 		// We put the information from user into the security.core.userdetails.User object
+			
+			// SimpleGrantedAuthority may allow us to have a more granular form of the role
+			// basically allows us to have more specific roles
+			// for example if we want a user to only be able to read certain places or not be able to create etc...
+			List<Role> roles = user.getRoles();
+			Set<GrantedAuthority> ga = new HashSet<>();
+			for(Role role : roles) {
+				ga.add(new SimpleGrantedAuthority(role.getName()));
+			}
+			
 			org.springframework.security.core.userdetails.User authUser = 
 					new org.springframework.security.core.userdetails.User(
 					user.getEmail(),
 					user.getPassword(),
-					// We use stream to put the roles into the SimpleGrantedAuthority
-					// A fancy for loop
-					// SimpleGrantedAuthority may allow us to have a more granular form of the role
-					// basically allows us to have more specific roles
-					// for example if we want a user to only be able to read certain places or not be able to create etc...
-					user.getRoles().stream().map((role) -> new SimpleGrantedAuthority(role.getName()))
-						.collect(Collectors.toList())
+					ga
 					);
+			
+			//	We can use stream to put the roles into the SimpleGrantedAuthority
+			//	A fancy for loop
+			//	user.getRoles().stream().map((role) -> new SimpleGrantedAuthority(role.getName()))
+			//		.collect(Collectors.toList())
+			
 			return authUser;
 		} else {
 			// If user is null then we just throw an exception
