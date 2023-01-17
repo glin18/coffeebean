@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.coffeebean.coffee_project.entity.Cart;
 import com.coffeebean.coffee_project.entity.Product;
 import com.coffeebean.coffee_project.entity.User;
 import com.coffeebean.coffee_project.repository.ProductRepository;
@@ -39,5 +41,16 @@ public class ShoppingController {
 		User user = userService.findByEmail(email);
 		model.addAttribute("user", user);
 		return "cart";
+	}
+	
+	@GetMapping("/addcart")
+	public String addCart(@RequestParam Long productid) {
+		String email = SecurityUtil.getSessionUser();
+		Cart cart = userService.findByEmail(email).getCart();
+		Product product = productRepository.findById(productid).get();
+		List<Product> newProductList = cart.getProducts();
+		newProductList.add(product);
+		cart.setProducts(newProductList);
+		return "redirect:/products/cart?success";
 	}
 }

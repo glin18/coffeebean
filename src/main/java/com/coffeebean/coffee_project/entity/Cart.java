@@ -1,5 +1,6 @@
 package com.coffeebean.coffee_project.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,5 +34,5 @@ public class Cart {
 	@JoinTable(name="carts_products",
 			joinColumns= {@JoinColumn(name="cart_id", referencedColumnName="id")},
 			inverseJoinColumns= {@JoinColumn(name="product_id", referencedColumnName="id")})
-	private List<Product> products;
+	private List<Product> products = new ArrayList<>();
 }

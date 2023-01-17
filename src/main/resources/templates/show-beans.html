@@ -73,7 +73,7 @@
     		<h5 class="card-title text-center" th:text="${product.getName()}"></h5>
     		<p class="card-text text-center" th:text="${#numbers.formatCurrency(product.getPrice())}"></p>
             <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" th:href="@{/products/addcart(${product.getId()})}">Add to Cart</a></div>
+                <a class="btn btn-outline-dark mt-auto" th:href="@{/products/addcart(productid=${product.getId()})}">Add to Cart</a></div>
             </div>
 			</div>
 			

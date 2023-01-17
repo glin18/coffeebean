@@ -53,6 +53,28 @@
         	<div th:if="${user} != null" class = "mt-3">
         		<h2><span th:text="${user.getUsername()}"></span>'s Cart</h2>
         	</div>
+        	
+        	<table class="table table-bordered table-striped mt-3">
+        		<thead>
+        			<th>Name</th>
+        			<th>Price</th>
+        			<th>Image URL</th>
+        			<th>Action</th>
+        		</thead>
+        		<tbody>
+        			<tr th:each="product:${user.getCart().getProducts()}">
+        				<td th:text="${product.getName()}"></td>
+        				<td th:text="${product.getPrice()}"></td>
+        				<td>
+        					<img th:src="${product.getImage()}" width="200" height="200"></img>
+        				</td>
+        				<td>
+        					<a th:href="@{/products/cart/remove(productid=${product.getId()})}" class = "btn btn-danger mt-1">Remove</a>
+        				</td>
+        			</tr>
+        		</tbody>
+        	</table>
+        	
         </div>
         
   		<!-- Footer-->
