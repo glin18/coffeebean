@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.coffeebean.coffee_project.entity.Cart;
 import com.coffeebean.coffee_project.entity.Product;
 import com.coffeebean.coffee_project.entity.User;
+import com.coffeebean.coffee_project.repository.CartRepository;
 import com.coffeebean.coffee_project.repository.ProductRepository;
 import com.coffeebean.coffee_project.security.SecurityUtil;
 import com.coffeebean.coffee_project.service.UserService;
@@ -26,6 +27,9 @@ public class ShoppingController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CartRepository cartRepository;
 
 	@GetMapping("/beans")
 	public ModelAndView showBeans() {
@@ -51,6 +55,7 @@ public class ShoppingController {
 		List<Product> newProductList = cart.getProducts();
 		newProductList.add(product);
 		cart.setProducts(newProductList);
+		cartRepository.save(cart);
 		return "redirect:/products/cart?success";
 	}
 }
