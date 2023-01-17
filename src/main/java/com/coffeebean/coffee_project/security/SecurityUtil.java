@@ -12,14 +12,10 @@ public class SecurityUtil {
 		// SecurityContextHolder is where Spring Security stores the details of who is authenticated
 		// SecurityContext is obtained from the SecurityContext 
 		if(!(authentication instanceof AnonymousAuthenticationToken)) {
-			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			String username;
-			if (principal instanceof UserDetails) {
-			  username = ((UserDetails)principal).getUsername();
-			} else {
-			  username = principal.toString();
-			}
-			return username;
+			// the name of the principal is the email
+			String email = authentication.getName();
+			System.out.println(email);
+			return email;
 		}
 		return null;
 	}
