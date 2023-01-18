@@ -39,8 +39,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" th:href="@{/account}">Account Info</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" th:href="@{/users/signup}">Sign up</a></li>
-                                <li><a class="dropdown-item" th:href="@{/users/login}">Sign in</a></li>
+                                <li><a class="dropdown-item" th:if="${user}==null" th:href="@{/users/signup}">Sign up</a></li>
+                                <li><a class="dropdown-item" th:if="${user}==null" th:href="@{/users/login}">Sign in</a></li>
                                 <li><a class="dropdown-item" th:href="@{/users/logout}">Log out</a></li>
                             </ul>
                         </li>
