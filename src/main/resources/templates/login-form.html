@@ -27,7 +27,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item">Account Info</a></li>
+                                <li><a class="dropdown-item" th:href="@{/account}">Account Info</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" th:href="@{/users/signup}">Sign up</a></li>
                                 <li><a class="dropdown-item" th:href="@{/users/login}">Sign in</a></li>
@@ -52,6 +52,9 @@
         	</div>
         	<div th:if="${param.logout}" class="alert alert-success w-50 mx-auto text-center">
         		You have been logged out
+        	</div>
+        	<div th:if="${param.loginrequired}" class="alert alert-danger w-50 mx-auto text-center">
+        		Login is required!
         	</div>
         	<h1>Login</h1>
         	<hr>
