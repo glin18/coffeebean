@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.coffeebean.coffee_project.entity.User;
+import com.coffeebean.coffee_project.repository.UserRepository;
 import com.coffeebean.coffee_project.security.SecurityUtil;
 import com.coffeebean.coffee_project.service.UserService;
 
@@ -16,6 +19,9 @@ public class AccountController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@GetMapping()
 	public String getAccountInfo(Model model) {
@@ -39,5 +45,14 @@ public class AccountController {
 		} else {
 			return "redirect:/users/login?loginrequired";
 		}
+	}
+	
+	@PostMapping("/edit")
+	public String editAccount(@ModelAttribute User user) {
+		User UserInfo = userService.findById(user.getId());
+		UserInfo.setAddress(user.getAddress());
+		UserInfo.setTel(user.getTel());
+		userRepository.save(UserInfo);
+		return "redirect:/account?success";
 	}
 }
