@@ -36,6 +36,9 @@ public class User {
 	private String username;
 	private String password;
 	
+	private String address;
+	private String tel;
+	
 	// Many to Many relationship between User and Roles
 	// We create a join table
 	// FetchType is EAGER because we always want the roles along with the User
@@ -50,6 +53,5 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cart_id", referencedColumnName="id")
 	private Cart cart = new Cart();
-	
 	
 }
