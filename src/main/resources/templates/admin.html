@@ -53,7 +53,7 @@
         		<tbody>
         			<tr th:each="product:${products}">
         				<td th:text="${product.getName()}"></td>
-        				<td th:text="${product.getPrice()}"></td>
+        				<td th:text="${#numbers.formatCurrency(product.getPrice())}"></td>
         				<td th:text="${product.getDescription()}"></td>
         				<td th:text="${product.getStock()}"></td>
         				<td>
