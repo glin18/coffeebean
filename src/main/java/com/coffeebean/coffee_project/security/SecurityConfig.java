@@ -47,7 +47,7 @@ public class SecurityConfig {
 			.and()
 			    .logout()
 			    .logoutUrl("/users/logout")
-			    .logoutSuccessUrl("/users/login")
+			    .logoutSuccessUrl("/home?loggedout")
 			    .invalidateHttpSession(true)
 			    .deleteCookies("JSESSIONID");
 		// When logging out we invalidate the session and we delete the cookie
