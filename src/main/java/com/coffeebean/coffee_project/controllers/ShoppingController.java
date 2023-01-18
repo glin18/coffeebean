@@ -36,6 +36,10 @@ public class ShoppingController {
 		ModelAndView mav = new ModelAndView("show-beans");
 		String email = SecurityUtil.getSessionUser();
 		User user = userService.findByEmail(email);
+		if( user != null) {
+			boolean isAdmin = userService.checkAdmin();
+			mav.addObject("isadmin", isAdmin);
+		}
 		List<Product> allProducts = productRepository.findAll();
 		mav.addObject("allProducts", allProducts);
 		mav.addObject("user", user);

@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsername(username);
 	}
 
-	// check if user is admin
+	// check if the user has the authority of ADMIN
 	@Override
 	public boolean checkAdmin() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
