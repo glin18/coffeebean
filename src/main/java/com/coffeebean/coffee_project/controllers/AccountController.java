@@ -28,4 +28,16 @@ public class AccountController {
 			return "redirect:/users/login?loginrequired";
 		}
 	}
+	
+	@GetMapping("/edit")
+	public String editAccountInfoForm(Model model) {
+		String email = SecurityUtil.getSessionUser();
+		User user = userService.findByEmail(email);
+		if(user != null) {
+			model.addAttribute("user", user);
+			return "account-edit";
+		} else {
+			return "redirect:/users/login?loginrequired";
+		}
+	}
 }
