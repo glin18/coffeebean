@@ -62,12 +62,24 @@
         			<td th:text="${user.getUsername()}"></td>
         		</tr>
         		<tr>
+        			<td class="fw-bold">User ID:</td>
+        			<td th:text="${user.getId()}"></td>
+        		</tr>
+        		<tr>
         			<td class="fw-bold">Email: </td>
         			<td th:text="${user.getEmail()}"></td>
         		</tr>
         		<tr>
         			<td class="fw-bold">Account Type: </td>
         			<td th:text="${user.getRoles().get(0).getName()}"></td>
+        		</tr>
+        		<tr>
+        			<td class="fw-bold">Telephone:</td>
+        			<td th:text="${user.getTel()}"></td>
+        		</tr>
+        		<tr>
+        			<td class="fw-bold">Address:</td>
+        			<td th:text="${user.getAddress()}"></td>
         		</tr>
         		</table>
         		<a class="btn btn-primary">Edit</a>
