@@ -53,9 +53,19 @@
         	<div th:if="${param.loggedin}" class="alert alert-success w-50 mx-auto text-center">
         		You have logged in successfully!
         	</div> -->
-        	<h1 class="mt-3">Account Info</h1>
+        	<h1 class="mt-3 text-center">Account Info</h1>
+        	<hr>
         	<div th:if="${user} != null" class = "mt-3">
-        		<h2><span th:text="${user.getUsername()}"></span>'s Account Information</h2>
+        		<table class="table table-bordered">
+        		<tr>
+        			<td class="fw-bold col-2">Username: </td>
+        			<td th:text="${user.getUsername()}"></td>
+        		</tr>
+        		<tr>
+        			<td class="fw-bold">Email: </td>
+        			<td th:text="${user.getEmail()}"></td>
+        		</tr>
+        		</table>
         	</div>
         </div>
         
