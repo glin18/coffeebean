@@ -40,7 +40,29 @@
             </div>
         </nav>
         <div class="container mt-4">
-        	<h1>Payment Methods</h1>
+        	<h1 class="text-center">Payment Method</h1>
+        	<hr>
+        	<div class="row">
+        		<h3>Your Order Summary</h3>
+	        	<table class="table table-bordered w-50 mt-1">
+	        		<thead>
+	        			<th>Descriptions</th>
+	        			<th>Amount</th>
+	        		</thead>
+	        		<tr th:each="product:${user.getCart().getProducts()}">
+	        			<td th:text="${product.getName()}"></td>
+	        			<td>+ <span th:text="${#numbers.formatCurrency(product.getPrice())}"></span></td>
+	        		</tr>
+	        		<tfoot>
+	        		<tr>
+	        			<td class="fw-bold" >Total: </td>	
+	        			<td th:text="${#numbers.formatCurrency(totalcost)}"></td>
+	        		</tr>
+	        		</tfoot>
+	        	</table>
+        	</div>
+        	<hr>
+        	
         </div>
         
   		<!-- Footer-->
