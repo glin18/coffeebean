@@ -61,7 +61,7 @@ public class ShoppingController {
 		return "cart";
 	}
 	
-	@GetMapping("/addcart")
+	@GetMapping("/cart/add")
 	public String addCart(@RequestParam Long productid) {
 		String email = SecurityUtil.getSessionUser();
 		Cart cart = userService.findByEmail(email).getCart();
@@ -83,5 +83,19 @@ public class ShoppingController {
 		cart.setProducts(newProductList);
 		cartRepository.save(cart);
 		return "redirect:/products/cart?removed";
+	}
+	
+	@GetMapping("/cart/payment")
+	public String paymentForm(Model model) {
+		String email = SecurityUtil.getSessionUser();
+		User user = userService.findByEmail(email);
+		model.addAttribute("user", user);
+		//calculate total price
+		double totalCost = 0;
+		for(Product product: user.getCart().getProducts()) {
+			totalCost += product.getPrice();
+		}
+		model.addAttribute("totalcost", totalCost);
+		return "payment";
 	}
 }
