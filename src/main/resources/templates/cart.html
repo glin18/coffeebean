@@ -46,11 +46,13 @@
             </div>
         </nav>
         <div class="container mt-4">
-        	<div th:if="${param.success}" class="alert alert-success w-50 mx-auto text-center">
+        	<div th:if="${param.success}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show">
         		Added to Cart Successfully!
+        		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         	</div>
-        	<div th:if="${param.removed}" class="alert alert-success w-50 mx-auto text-center">
+        	<div th:if="${param.removed}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show">
         		Item removed from Cart Successfully!
+        		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         	</div>
         	<h1 class="mt-3 text-center">Shopping Cart</h1>
         	<hr>
@@ -82,7 +84,7 @@
         	<h6>Total Cost: <span th:text="${#numbers.formatCurrency(totalcost)}"></span></h6>
         	<button class="btn btn-primary mt-2">Checkout</button>
         	<hr>
-        	<a th:href="@{/products/beans}" class="btn btn-primary">Keep Shopping</a>
+        	<a th:href="@{/products/beans}" class="btn btn-primary mb-3">Keep Shopping</a>
         	
         </div>
         
