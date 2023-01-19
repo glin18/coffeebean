@@ -98,4 +98,12 @@ public class ShoppingController {
 		model.addAttribute("totalcost", totalCost);
 		return "payment";
 	}
+	
+	@GetMapping("/reviews")
+	public String showReviews(@RequestParam Long productid, Model model) {
+		Product product = productRepository.findById(productid).get();
+		model.addAttribute(product);
+		return "reviews";
+	}
+	
 }

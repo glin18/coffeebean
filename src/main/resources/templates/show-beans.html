@@ -83,6 +83,7 @@
         		<h5 class="card-title">Product Description</h5>
         		<p class="card-text" th:text="${product.getDescription()}"></p>
         		<p class="card-text"><small class="text-muted"><span th:text="${product.getStock}"></span> Left in Stock</small></p>
+        		<a th:href="@{/product/reviews(productid=${product.getId()})}">View Reviews</a>
       		</div>
     		</div>
 			
