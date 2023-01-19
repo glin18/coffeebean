@@ -68,7 +68,7 @@
         <div class="container mt-5 d-flex justify-content-around">
        		
        		
-        	<div class="card col-6" style="width: 18rem;">
+        	<div class="card col-6" style="width: 18rem; height: 25rem;">
   			<img class="card-img-top" th:src="${product.getImage()}" alt="Card image cap">
   			<div class="card-body">
     		<h5 class="card-title text-center" th:text="${product.getName()}"></h5>
@@ -81,6 +81,13 @@
 			<div class="col-md-8 card">
       			<div class="card-body">
       				<a class="btn btn-primary" th:href="@{/products/reviews/add(productid=${product.getId()})}">Add Review</a>
+      				<hr>
+      				<div class="card w-45 mt-2 d-inline-flex" th:each="review:${reviewList}">
+					  <div class="card-body">
+					    <h5 class="card-title">Rating: <span th:text="${review.getRating()}"></span></h5>
+					    <p class="card-text">Comment: <span th:text="${review.getComment()}"></span></p>
+					  </div>
+					</div>
       				<hr>
         			<a th:href="@{/products/beans}">Back To All Products</a>
       			</div>

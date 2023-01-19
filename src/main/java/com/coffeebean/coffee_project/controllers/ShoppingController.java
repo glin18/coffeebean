@@ -110,6 +110,8 @@ public class ShoppingController {
 	@GetMapping("/reviews")
 	public String showReviews(@RequestParam Long productid, Model model) {
 		Product product = productRepository.findById(productid).get();
+		List<Review> reviewList = product.getReviews();
+		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("product", product);
 		return "reviews";
 	}
