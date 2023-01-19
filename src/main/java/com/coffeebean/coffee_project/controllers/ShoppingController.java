@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.coffeebean.coffee_project.entity.Cart;
 import com.coffeebean.coffee_project.entity.Product;
+import com.coffeebean.coffee_project.entity.Review;
 import com.coffeebean.coffee_project.entity.User;
 import com.coffeebean.coffee_project.repository.CartRepository;
 import com.coffeebean.coffee_project.repository.ProductRepository;
@@ -102,8 +103,17 @@ public class ShoppingController {
 	@GetMapping("/reviews")
 	public String showReviews(@RequestParam Long productid, Model model) {
 		Product product = productRepository.findById(productid).get();
-		model.addAttribute(product);
+		model.addAttribute("product", product);
 		return "reviews";
+	}
+	
+	@GetMapping("/reviews/add")
+	public String addReviewsForm(@RequestParam Long productid, Model model) {
+		Product product = productRepository.findById(productid).get();
+		model.addAttribute("product", product);
+		Review review = new Review();
+		model.addAttribute("review", review);
+		return "reviews-add";
 	}
 	
 }
