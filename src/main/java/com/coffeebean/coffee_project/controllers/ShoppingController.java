@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,9 +16,11 @@ import com.coffeebean.coffee_project.entity.Cart;
 import com.coffeebean.coffee_project.entity.Product;
 import com.coffeebean.coffee_project.entity.Review;
 import com.coffeebean.coffee_project.entity.User;
+import com.coffeebean.coffee_project.model.ReviewModel;
 import com.coffeebean.coffee_project.repository.CartRepository;
 import com.coffeebean.coffee_project.repository.ProductRepository;
 import com.coffeebean.coffee_project.security.SecurityUtil;
+import com.coffeebean.coffee_project.service.ReviewService;
 import com.coffeebean.coffee_project.service.UserService;
 
 @Controller
@@ -31,6 +35,9 @@ public class ShoppingController {
 	
 	@Autowired
 	CartRepository cartRepository;
+	
+	@Autowired
+	ReviewService reviewService;
 
 	@GetMapping("/beans")
 	public ModelAndView showBeans() {
@@ -111,9 +118,26 @@ public class ShoppingController {
 	public String addReviewsForm(@RequestParam Long productid, Model model) {
 		Product product = productRepository.findById(productid).get();
 		model.addAttribute("product", product);
-		Review review = new Review();
+		ReviewModel review = new ReviewModel();
+		review.setProductid(productid);
 		model.addAttribute("review", review);
 		return "reviews-add";
+	}
+	
+	@PostMapping("/reviews/add")
+	public String addReview(@ModelAttribute ReviewModel reviewModel) {
+		Long productid = reviewModel.getProductid();
+		Review review = new Review();
+		review.setComment(reviewModel.getComment());
+		review.setRating(reviewModel.getRating());
+		Product product = productRepository.findById(productid).get();
+		review.setProduct(product);
+		List<Review> reviewList = product.getReviews();
+		reviewList.add(review);
+		product.setReviews(reviewList);
+		productRepository.save(product);
+		reviewService.save(review);
+		return "redirect:/products/reviews?success";
 	}
 	
 }
