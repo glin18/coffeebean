@@ -86,6 +86,7 @@
       			<div class="card-body">
       				<a class="btn btn-primary" th:href="@{/products/reviews/add(productid=${product.getId()})}">Add Review</a>
       				<hr>
+      				<div th:if="${reviewList.size()}==0">Currently No Reviews</div>
       				<div class="card mt-2 d-inline-flex" th:each="review:${reviewList}" style="width: 23rem;">
 					  <div class="card-body">
 					    <h5 class="card-title">Rating: <span th:text="${review.getRating()}"></span></h5>
