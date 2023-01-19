@@ -65,7 +65,8 @@
             </div>
         </header>
         <!-- Section-->
-        <div class="container mt-5 d-flex justify-content-around" th:each="product:${allProducts}">
+        <div class="container mt-5 d-flex justify-content-around">
+       		
        		
         	<div class="card col-6" style="width: 18rem;">
   			<img class="card-img-top" th:src="${product.getImage()}" alt="Card image cap">
@@ -79,11 +80,8 @@
 			
 			<div class="col-md-8 card">
       			<div class="card-body">
-        		<h5 class="card-title">Product Description</h5>
-        		<p class="card-text" th:text="${product.getDescription()}"></p>
-        		<p class="card-text"><small class="text-muted"><span th:text="${product.getStock}"></span> Left in Stock</small></p>
-        		<a th:href="@{/products/reviews(productid=${product.getId()})}">View Reviews</a>
-      		</div>
+        			<a th:href="@{/products/beans}">Back To All Products</a>
+      			</div>
     		</div>
 			
         </div>
