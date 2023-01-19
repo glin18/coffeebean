@@ -66,13 +66,17 @@
         </header>
         <!-- Section-->
         <div th:if="${param.success}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show mt-4">
-        		Review Successfully added!
+        		Review Successfully Added!
+        		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${param.delete}" class="alert alert-warning w-50 mx-auto text-center alert-dismissible fade show mt-4">
+        		Review Successfully Deleted!
         		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         	
         <div class="container mt-5 d-flex justify-content-around">
        		
-        	<div class="card col-6" style="width: 18rem; height: 25rem;">
+        	<div class="card col-6" style="width: 18rem; height: 30rem;">
   			<img class="card-img-top" th:src="${product.getImage()}" alt="Card image cap">
   			<div class="card-body">
     		<h5 class="card-title text-center" th:text="${product.getName()}"></h5>

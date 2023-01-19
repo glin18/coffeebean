@@ -147,7 +147,7 @@ public class ShoppingController {
 		Review review = reviewService.findById(reviewid);
 		Long productId = review.getProduct().getId();
 		reviewService.delete(review);
-		return "redirect:/products/reviews?productid="+ productId; 
+		return "redirect:/products/reviews?productid="+ productId + "&delete"; 
 	}
 	
 }
