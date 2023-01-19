@@ -65,8 +65,12 @@
             </div>
         </header>
         <!-- Section-->
+        <div th:if="${param.success}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show mt-4">
+        		Review Successfully added!
+        		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        	
         <div class="container mt-5 d-flex justify-content-around">
-       		
        		
         	<div class="card col-6" style="width: 18rem; height: 25rem;">
   			<img class="card-img-top" th:src="${product.getImage()}" alt="Card image cap">

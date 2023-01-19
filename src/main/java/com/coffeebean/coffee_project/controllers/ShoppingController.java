@@ -137,9 +137,9 @@ public class ShoppingController {
 		List<Review> reviewList = product.getReviews();
 		reviewList.add(review);
 		product.setReviews(reviewList);
-		productRepository.save(product);
+//		productRepository.save(product);
 		reviewService.save(review);
-		return "redirect:/products/reviews?productid=" + productid;
+		return "redirect:/products/reviews?productid=" + productid + "&success";
 	}
 	
 }
