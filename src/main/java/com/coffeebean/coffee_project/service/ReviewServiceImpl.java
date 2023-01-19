@@ -16,6 +16,15 @@ public class ReviewServiceImpl implements ReviewService {
 	public void save(Review review) {
 		reviewRepository.save(review);
 	}
-	
+
+	@Override
+	public Review findById(Long reviewId) {
+		return reviewRepository.findById(reviewId).get();
+	}
+
+	@Override
+	public void delete(Review review) {
+		reviewRepository.delete(review);
+	}
 	
 }

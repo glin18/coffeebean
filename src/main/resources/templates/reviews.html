@@ -86,10 +86,11 @@
       			<div class="card-body">
       				<a class="btn btn-primary" th:href="@{/products/reviews/add(productid=${product.getId()})}">Add Review</a>
       				<hr>
-      				<div class="card w-45 mt-2 d-inline-flex" th:each="review:${reviewList}">
+      				<div class="card mt-2 d-inline-flex" th:each="review:${reviewList}" style="width: 23rem;">
 					  <div class="card-body">
 					    <h5 class="card-title">Rating: <span th:text="${review.getRating()}"></span></h5>
 					    <p class="card-text">Comment: <span th:text="${review.getComment()}"></span></p>
+					    <a class="btn btn-danger" th:href="@{/products/reviews/delete(reviewid=${review.getId()})}">Delete</a>
 					  </div>
 					</div>
       				<hr>

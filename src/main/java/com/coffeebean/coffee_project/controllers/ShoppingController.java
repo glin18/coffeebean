@@ -142,4 +142,12 @@ public class ShoppingController {
 		return "redirect:/products/reviews?productid=" + productid + "&success";
 	}
 	
+	@GetMapping("/reviews/delete")
+	public String deleteReview(@RequestParam Long reviewid) {
+		Review review = reviewService.findById(reviewid);
+		Long productId = review.getProduct().getId();
+		reviewService.delete(review);
+		return "redirect:/products/reviews?productid="+ productId; 
+	}
+	
 }
