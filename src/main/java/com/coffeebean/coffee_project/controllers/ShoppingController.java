@@ -111,6 +111,8 @@ public class ShoppingController {
 	public String showReviews(@RequestParam Long productid, Model model) {
 		Product product = productRepository.findById(productid).get();
 		List<Review> reviewList = product.getReviews();
+		String currentUserEmail = SecurityUtil.getSessionUser();
+		model.addAttribute("currentUserEmail", currentUserEmail);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("product", product);
 		return "reviews";

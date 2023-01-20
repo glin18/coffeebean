@@ -95,7 +95,7 @@
 					  <div class="card-body">
 					    <h5 class="card-title">Rating: <span th:text="${review.getRating()}"></span>/5</h5>
 					    <p class="card-text"><span class="fst-italic" th:text="${review.getUser().getUsername()}"></span>: <span th:text="${review.getComment()}"></span></p>
-					    <a class="btn btn-danger" th:href="@{/products/reviews/delete(reviewid=${review.getId()})}">Delete</a>
+					    <a class="btn btn-danger" th:if="${review.getUser.getEmail()} == ${currentUserEmail}" th:href="@{/products/reviews/delete(reviewid=${review.getId()})}">Delete</a>
 					  </div>
 					</div>
       				<hr>
