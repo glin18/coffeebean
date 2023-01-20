@@ -93,8 +93,8 @@
       				<div th:if="${reviewList.size()}==0">Currently No Reviews</div>
       				<div class="card mt-2 d-inline-flex" th:each="review:${reviewList}" style="width: 23rem;">
 					  <div class="card-body">
-					    <h5 class="card-title">Rating: <span th:text="${review.getRating()}"></span></h5>
-					    <p class="card-text">Comment: <span th:text="${review.getComment()}"></span></p>
+					    <h5 class="card-title">Rating: <span th:text="${review.getRating()}"></span>/5</h5>
+					    <p class="card-text"><span class="fst-italic" th:text="${review.getUser().getUsername()}"></span>: <span th:text="${review.getComment()}"></span></p>
 					    <a class="btn btn-danger" th:href="@{/products/reviews/delete(reviewid=${review.getId()})}">Delete</a>
 					  </div>
 					</div>

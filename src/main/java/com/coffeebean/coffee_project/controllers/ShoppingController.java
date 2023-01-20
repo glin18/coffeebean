@@ -128,8 +128,12 @@ public class ShoppingController {
 	
 	@PostMapping("/reviews/add")
 	public String addReview(@ModelAttribute ReviewModel reviewModel) {
+		String email = SecurityUtil.getSessionUser();
+		User user = userService.findByEmail(email);
+		
 		Long productid = reviewModel.getProductid();
 		Review review = new Review();
+		review.setUser(user);
 		review.setComment(reviewModel.getComment());
 		review.setRating(reviewModel.getRating());
 		Product product = productRepository.findById(productid).get();
