@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -54,4 +55,6 @@ public class User {
 	@JoinColumn(name="cart_id", referencedColumnName="id")
 	private Cart cart = new Cart();
 	
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	private List<Review> reveiws = new ArrayList<>();
 }

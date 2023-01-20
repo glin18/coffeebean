@@ -27,5 +27,7 @@ public class Review {
 	@JoinColumn(name="product_id")
 	private Product product;
 	
-//	private User user;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 }
