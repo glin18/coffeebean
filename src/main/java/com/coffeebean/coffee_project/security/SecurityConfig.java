@@ -35,6 +35,8 @@ public class SecurityConfig {
 			.authorizeRequests()
 			.antMatchers("/admin/**")
 			.hasAuthority("ADMIN")
+			.antMatchers("/products/reviews/add")
+			.hasAuthority("USER")
 			.antMatchers("/users/signup", "/users/login", "/users/products", "/", "/home")
 			.permitAll()
 			.and()
