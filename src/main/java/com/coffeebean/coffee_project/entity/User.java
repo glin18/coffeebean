@@ -56,5 +56,5 @@ public class User {
 	private Cart cart = new Cart();
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	private List<Review> reveiws = new ArrayList<>();
+	private List<Review> reviews = new ArrayList<>();
 }
