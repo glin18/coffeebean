@@ -47,6 +47,7 @@
         			<th>Price</th>
         			<th>Description</th>
         			<th>Stock</th>
+        			<th>Reviews</th>
         			<th>Image URL</th>
         			<th>Action</th>
         		</thead>
@@ -56,6 +57,7 @@
         				<td th:text="${#numbers.formatCurrency(product.getPrice())}"></td>
         				<td th:text="${product.getDescription()}"></td>
         				<td th:text="${product.getStock()}"></td>
+        				<td th:text="${product.getReviews.size()}"></td>
         				<td>
         					<img th:src="${product.getImage()}" width="200" height="200"></img>
         				</td>
