@@ -99,6 +99,7 @@
 					  </div>
 					</div>
       				<hr>
+      				<p th:if="${averageRating}!=null">Average Rating: <span th:text="${averageRating}"></span>/5</p>
         			<a th:href="@{/products/beans}">Back To All Products</a>
       			</div>
     		</div>

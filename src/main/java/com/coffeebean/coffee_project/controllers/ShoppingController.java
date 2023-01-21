@@ -1,5 +1,6 @@
 package com.coffeebean.coffee_project.controllers;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,11 +112,26 @@ public class ShoppingController {
 	public String showReviews(@RequestParam Long productid, Model model) {
 		Product product = productRepository.findById(productid).get();
 		List<Review> reviewList = product.getReviews();
+		String averageRating = findAverageRating(reviewList);
 		String currentUserEmail = SecurityUtil.getSessionUser();
 		model.addAttribute("currentUserEmail", currentUserEmail);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("product", product);
+		model.addAttribute("averageRating", averageRating);
 		return "reviews";
+	}
+	
+	public String findAverageRating(List<Review> reviewList) {
+		if(reviewList.size() == 0) {
+			return null;
+		} else {
+			double sum = 0.0;
+			for(Review review : reviewList) {
+				sum += review.getRating();
+			}
+			DecimalFormat df = new DecimalFormat("#.#");
+			return df.format(sum/reviewList.size());
+		}
 	}
 	
 	@GetMapping("/reviews/add")
