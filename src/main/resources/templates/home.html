@@ -46,24 +46,73 @@
                 </div>
             </div>
         </nav>
-        <div class="container mt-4">
-        	<div th:if="${param.success}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show">
+        
+         <header class="bg-dark py-5">
+            <div class="container px-5">
+            	<div th:if="${param.success}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show">
         		You are registered successfully!
         		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        	</div>
-        	<div th:if="${param.loggedin}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show">
+        		</div>
+        		
+        		<div th:if="${param.loggedin}" class="alert alert-success w-50 mx-auto text-center alert-dismissible fade show">
         		You have logged in successfully!
         		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        	</div>
-        	<div th:if="${param.loggedout}" class="alert alert-warning w-50 mx-auto text-center alert-dismissible fade show">
+        		</div>
+        		
+        		<div th:if="${param.loggedout}" class="alert alert-warning w-50 mx-auto text-center alert-dismissible fade show">
         		You have logged out successfully!
         		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        	</div>
-        	<h1 class="mt-3">Home Page</h1>
-        	<div th:if="${user} != null" class = "mt-3">
-        		<h2>Welcome <span th:text="${user.getUsername()}"></span>!</h2>
-        	</div>
-        </div>
+        		</div>
+        		
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h3 class="display-5 fw-bolder text-white mb-2">Hi <span th:if="${user} != null" th:text="${user.getUsername}"></span>! Welcome To CoffeeBean</h3>
+                            <p class="lead text-white-50 mb-4">The one stop shop for the highest quality coffee that you can find. We provide a large variety of coffee that will definitely suit your taste</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" th:if="${user}==null" th:href="@{/users/signup}">Get Started</a>
+                                <a class="btn btn-outline-light btn-lg px-4" th:href="@{products/beans}">Begin Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Features section-->
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                        <h2 class="h4 fw-bolder">Featured title</h2>
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
+                        <h2 class="h4 fw-bolder">Featured title</h2>
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                        <h2 class="h4 fw-bolder">Featured title</h2>
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         
   		<!-- Footer-->
         <!-- <footer class="py-5 bg-dark">
