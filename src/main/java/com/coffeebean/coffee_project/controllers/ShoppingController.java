@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,6 +95,9 @@ public class ShoppingController {
 		return "redirect:/products/cart?removed";
 	}
 	
+	@Value("${STRIPE_PUBLIC_KEY}")
+    private String stripePublicKey;
+	
 	@GetMapping("/cart/payment")
 	public String paymentForm(Model model) {
 		String email = SecurityUtil.getSessionUser();
@@ -105,6 +109,8 @@ public class ShoppingController {
 			totalCost += product.getPrice();
 		}
 		model.addAttribute("totalcost", totalCost);
+		model.addAttribute("stripePublicKey", stripePublicKey);
+		// model.addAttribute("currency", ChargeRequest.Currency.EUR);
 		return "payment";
 	}
 	
