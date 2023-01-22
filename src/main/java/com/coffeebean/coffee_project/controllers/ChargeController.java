@@ -13,6 +13,7 @@ import com.coffeebean.coffee_project.entity.Product;
 import com.coffeebean.coffee_project.entity.User;
 import com.coffeebean.coffee_project.model.ChargeRequest;
 import com.coffeebean.coffee_project.model.ChargeRequest.Currency;
+import com.coffeebean.coffee_project.repository.ProductRepository;
 import com.coffeebean.coffee_project.security.SecurityUtil;
 import com.coffeebean.coffee_project.service.StripeService;
 import com.coffeebean.coffee_project.service.UserService;
@@ -27,6 +28,9 @@ public class ChargeController {
     
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private ProductRepository productRepository;
     
 
     @PostMapping("/charge")
@@ -47,6 +51,8 @@ public class ChargeController {
 		int totalCost = 0;
 		for(Product product: user.getCart().getProducts()) {
 			totalCost += product.getPrice();
+			product.setStock(product.getStock()-1);
+			productRepository.save(product);
 		}
 		model.addAttribute("amount", totalCost);
 		List<Product> previousProductList = new ArrayList<>(productList);
