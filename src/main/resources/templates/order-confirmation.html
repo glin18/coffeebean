@@ -6,12 +6,32 @@
     <body>
         <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
         <div th:unless='${error}'>
-            <h3 style='color: green;'>Success!</h3>
+            <h3 style='color: green;'>Success! Thank you <span th:text="${user.getUsername()}"></span> for your purchase</h3>
             <div>Id.: <span th:text='${id}' /></div>
             <div>Status: <span th:text='${status}' /></div>
             <div>Charge id.: <span th:text='${chargeId}' /></div>
             <div>Balance transaction id.: <span th:text='${balance_transaction}' /></div>
+            <div class="row">
+			<h3>Your Order Details</h3>
+			<table class="table table-bordered w-50 mt-1">
+				<thead>
+					<th>Descriptions</th>
+					<th>Amount</th>
+				</thead>
+				<tr th:each="product:${products}">
+					<td th:text="${product.getName()}"></td>
+					<td>+ <span
+						th:text="${#numbers.formatCurrency(product.getPrice())}"></span></td>
+				</tr>
+				<tfoot>
+					<tr>
+						<td class="fw-bold">Total:</td>
+						<td th:text="${#numbers.formatCurrency(amount)}"></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
         </div>
-        <a href='/checkout.html'>Checkout again</a>
+        <a th:href='@{/}'>Return Home</a>
     </body>
 </html>
