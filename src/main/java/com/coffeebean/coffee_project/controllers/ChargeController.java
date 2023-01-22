@@ -19,7 +19,7 @@ import com.stripe.model.Charge;
 public class ChargeController {
 
     @Autowired
-    private StripeService paymentsService;
+    private StripeService stripeService;
     
     @Autowired
     private UserService userService;
@@ -29,7 +29,7 @@ public class ChargeController {
       throws StripeException {
         chargeRequest.setDescription("Example charge");
         chargeRequest.setCurrency(Currency.EUR);
-        Charge charge = paymentsService.charge(chargeRequest);
+        Charge charge = stripeService.charge(chargeRequest);
         model.addAttribute("id", charge.getId());
         model.addAttribute("status", charge.getStatus());
         model.addAttribute("chargeId", charge.getId());
@@ -37,12 +37,12 @@ public class ChargeController {
         String email = SecurityUtil.getSessionUser();
 		User user = userService.findByEmail(email);
 		model.addAttribute("user", user);
-        return "result";
+        return "order-confirmation";
     }
 
     @ExceptionHandler(StripeException.class)
     public String handleError(Model model, StripeException ex) {
         model.addAttribute("error", ex.getMessage());
-        return "result";
+        return "order-confirmation";
     }
 }

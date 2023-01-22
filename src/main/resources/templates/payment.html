@@ -74,19 +74,19 @@
 				<tfoot>
 					<tr>
 						<td class="fw-bold">Total:</td>
-						<td th:text="${#numbers.formatCurrency(totalcost)}"></td>
+						<td th:text="${#numbers.formatCurrency(amount)}"></td>
 					</tr>
 				</tfoot>
 			</table>
 		</div>
 		<form action='/charge' method='POST' id='checkout-form'>
-			<input type='hidden' th:value='${totalcost}' name='amount' /> 
+			<input type='hidden' th:value='${amount*100}' name='amount' /> 
 			<!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
 			<script src='https://checkout.stripe.com/checkout.js'
 				class='stripe-button'
 				th:attr='data-key=${stripePublicKey}, 
-         data-amount=${totalcost}, 
-         data-currency=${currency}'
+         				data-amount=${amount}*100, 
+         				data-currency=${currency}'
 				data-name='CoffeeBean' data-description='Coffee Bean Checkout'
 				data-image='https://i0.wp.com/awakedetroit.com/wp-content/uploads/2019/04/cropped-Favicon.png?fit=512%2C512&ssl=1'
 				data-locale='auto' data-zip-code='false'>

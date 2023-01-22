@@ -105,11 +105,11 @@ public class ShoppingController {
 		User user = userService.findByEmail(email);
 		model.addAttribute("user", user);
 		//calculate total price
-		double totalCost = 0;
+		int totalCost = 0;
 		for(Product product: user.getCart().getProducts()) {
 			totalCost += product.getPrice();
 		}
-		model.addAttribute("totalcost", totalCost);
+		model.addAttribute("amount", totalCost);
 		model.addAttribute("stripePublicKey", stripePublicKey);
 		model.addAttribute("currency", ChargeRequest.Currency.EUR);
 		return "payment";
