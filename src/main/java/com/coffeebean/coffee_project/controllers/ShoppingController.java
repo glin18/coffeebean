@@ -18,6 +18,7 @@ import com.coffeebean.coffee_project.entity.Cart;
 import com.coffeebean.coffee_project.entity.Product;
 import com.coffeebean.coffee_project.entity.Review;
 import com.coffeebean.coffee_project.entity.User;
+import com.coffeebean.coffee_project.model.ChargeRequest;
 import com.coffeebean.coffee_project.model.ReviewModel;
 import com.coffeebean.coffee_project.repository.CartRepository;
 import com.coffeebean.coffee_project.repository.ProductRepository;
@@ -110,7 +111,7 @@ public class ShoppingController {
 		}
 		model.addAttribute("totalcost", totalCost);
 		model.addAttribute("stripePublicKey", stripePublicKey);
-		// model.addAttribute("currency", ChargeRequest.Currency.EUR);
+		model.addAttribute("currency", ChargeRequest.Currency.EUR);
 		return "payment";
 	}
 	
