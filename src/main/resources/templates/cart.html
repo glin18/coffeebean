@@ -56,15 +56,18 @@
         	</div>
         	<h1 class="mt-3 text-center">Shopping Cart</h1>
         	<hr>
-        	<div th:if="${user} != null" class = "mt-3">
+        	<div th:if="${user} != null and ${user.getCart().getProducts().size()} != 0" class = "mt-3">
         		<h4>Hey <span th:text="${user.getUsername()}"></span>, review your cart before checkout!</h4>
         	</div>
+        	<div th:if="${user} != null and ${user.getCart().getProducts().size()} == 0" class = "mt-3">
+        		<h4>Hey <span th:text="${user.getUsername()}"></span>, your cart is empty!</h4>
+        	</div>
         	
-        	<table class="table table-bordered table-striped mt-3 w-50">
+        	<table th:if="${user.getCart().getProducts().size() != 0}" class="table table-bordered table-striped mt-3 w-50">
         		<thead>
         			<th>Name</th>
         			<th>Price</th>
-        			<th>Image URL</th>
+        			<th>Image</th>
         			<th>Action</th>
         		</thead>
         		<tbody>
@@ -82,7 +85,7 @@
         	</table>
         	<h6>Total Items: <span th:text="${user.getCart().getProducts().size()}"></span></h6>
         	<h6>Total Cost: <span th:text="${#numbers.formatCurrency(totalcost)}"></span></h6>
-        	<a class="btn btn-primary mt-2" th:href="@{/products/cart/payment}">Continue to Payment</a>
+        	<a class="btn btn-primary mt-2" th:href="@{/products/cart/payment}" th:if="${user.getCart.getProducts.size()!=0}">Continue to Payment</a>
         	<hr>
         	<a th:href="@{/products/beans}" class="btn btn-primary mb-3">Keep Shopping</a>
         	
