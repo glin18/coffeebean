@@ -121,6 +121,8 @@ public class ShoppingController {
 		List<Review> reviewList = product.getReviews();
 		String averageRating = findAverageRating(reviewList);
 		String currentUserEmail = SecurityUtil.getSessionUser();
+		User user = userService.findByEmail(currentUserEmail);
+		model.addAttribute("user", user);
 		model.addAttribute("currentUserEmail", currentUserEmail);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("product", product);
@@ -143,6 +145,9 @@ public class ShoppingController {
 	
 	@GetMapping("/reviews/add")
 	public String addReviewsForm(@RequestParam Long productid, Model model) {
+		String email = SecurityUtil.getSessionUser();
+		User user = userService.findByEmail(email);
+		model.addAttribute("user", user);
 		Product product = productRepository.findById(productid).get();
 		model.addAttribute("product", product);
 		ReviewModel review = new ReviewModel();
