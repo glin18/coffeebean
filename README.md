@@ -1,6 +1,6 @@
 # coffeebean
 CoffeeBean is a Spring Boot Project currently in progress! 
-It is a full stack ecommerce web application :)
+It is a ecommerce web application :)
 
 ## Tools
 - Spring Boot, Maven, Spring Security, Spring Web, Spring Data JPA, Lombok, Thymeleaf, Hibernate Validator, MySQL, Bootstrap
